@@ -35,12 +35,8 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y \
 curl https://pyenv.run | bash
 
 # Append pyenv settings to .bashrc
-cat <<'EOF' >> ~/.bashrc
-export PYENV_ROOT="\$HOME/.pyenv"
-export PATH="\$PYENV_ROOT/bin:\$PATH"
-eval "\$(pyenv init --path)"
-eval "\$(pyenv init -)"
-EOF
+echo -e 'export PYENV_ROOT="$HOME/.pyenv"\nexport PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+echo -e 'eval "$(pyenv init --path)"\neval "$(pyenv init -)"' >> ~/.bashrc
 
 # Create .ssh directory and set permissions
 mkdir -p ~/.ssh
@@ -53,11 +49,8 @@ service ssh start
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 
 # Append nvm settings to .bashrc
-cat <<'EOF' >> ~/.bashrc
-export NVM_DIR="\$HOME/.nvm"
-[ -s "\$NVM_DIR/nvm.sh" ] && \. "\$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "\$NVM_DIR/bash_completion" ] && \. "\$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-EOF
+echo -e 'export NVM_DIR="$HOME/.nvm"' >> ~/.bashrc
+echo -e '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> ~/.bashrc
 
 # Source nvm script directly to ensure it is available in the current shell session
 export NVM_DIR="$HOME/.nvm"
